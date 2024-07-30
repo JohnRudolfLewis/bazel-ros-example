@@ -1,0 +1,16 @@
+{
+    "name": "${localWorkspaceFolderBasename}",
+    "build": {
+      "dockerfile": "Dockerfile"
+    },
+    "customizations": {
+      "vscode": {
+        "extensions": [
+          "BazelBuild.vscode-bazel",
+          "llvm-vs-code-extensions.vscode-clangd",
+          "StackBuild.bazel-stack-vscode",
+          "xaver.clang-format"
+        ]
+      }
+    }
+}

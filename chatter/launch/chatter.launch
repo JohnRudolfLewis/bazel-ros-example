@@ -1,0 +1,5 @@
+<launch>
+  <node type="chatter/talker" name="talker" />
+  <node type="chatter/listener" name="listener" output="screen" />
+  <node type="chatter/listener.py" name="listenerpy" pkg="bazel-ros-example" output="screen" />
+</launch>

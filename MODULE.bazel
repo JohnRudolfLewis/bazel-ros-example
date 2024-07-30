@@ -1,0 +1,37 @@
+module(
+    name = "ros_example",
+    repo_name = "com_github_johnrudolflewis_bazel_ros_example",
+)
+
+bazel_dep(name = "rules_cc", version = "0.0.9")
+bazel_dep(name = "rules_python", version = "0.34.0")
+
+bazel_dep(name = "com_github_mvukov_rules_ros")
+archive_override(
+    module_name = "com_github_mvukov_rules_ros",
+    integrity = "sha256-8cTXcx81MLTKViq19fuBa6lG+k3r1l0RHmdyCK/bsi8=",
+    strip_prefix = "rules_ros-3156a7f28b8b74eafb92f79b2fadadeefea9aaa6",
+    urls = "https://github.com/mvukov/rules_ros//archive/3156a7f28b8b74eafb92f79b2fadadeefea9aaa6.zip"
+)
+
+bazel_dep(name = "rules_boost")
+archive_override(
+    module_name = "rules_boost",
+    integrity = "sha256-EEmldYvkzka7KLDMgziSgCXDWK9J04/F3DBdFnv+188=",
+    strip_prefix = "rules_boost-8fa193c4e21daaa2d46ff6b9c2b5a2de70b6caa1",
+    urls = "https://github.com/nelhage/rules_boost/archive/8fa193c4e21daaa2d46ff6b9c2b5a2de70b6caa1.zip",
+)
+
+non_module_ros_repositories = use_extension("@com_github_mvukov_rules_ros//ros:extensions.bzl", "non_module_dependencies")
+use_repo(
+    non_module_ros_repositories,
+    "ros_comm",
+    "ros_genpy",
+    "ros_std_msgs",
+    "roscpp_core",
+)
+
+python = use_extension("@rules_python//python/extensions:python.bzl", "python")
+python.toolchain(
+    python_version = "3.10",
+)
